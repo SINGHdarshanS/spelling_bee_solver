@@ -1,6 +1,6 @@
 import numpy as np
 
-letters = []
+letters = set()
 i = 0
 cont = False
 # gathering outer letters
@@ -21,7 +21,7 @@ while i < 6:
         cont = False
 
     if cont:
-        letters.extend(pot)
+        letters.add(pot)
         i += 1
 
 cont = False
@@ -43,5 +43,34 @@ while not cont:
     if center in letters:
         print("You have already inputted \'{}.\' Please enter a different letter".format(center))
         cont = False
+letters.add(center)
 
+with open('todays_answers.txt', 'w') as answers:
+    with open('short_words.txt', 'r') as words:
+        for line in words:
+            yes = True
+            temp = line.rstrip()
+            chars = set()
+            for char in temp:
+                chars.add(char)
+            # print(chars)
+            if center not in chars:
+                continue
+            else:
+                for char in chars:
+                    if char not in letters:
+                        yes = False
+                        break
+            if yes:
+                if len(line.rstrip()) >= 4:
+                    print(line.rstrip())
+                    answers.write(line)
 
+print('\n\n\n\n\n If the following words work please enter yes and press enter, otherwise just press enter...\n\n')
+
+with open('todays_answers.txt', 'r') as f:
+    with open('blacklist.txt', 'a') as black:
+        for line in f:
+            yn = input(f'{line.rstrip()}?\t')
+            if not yn:
+                black.write(line)
