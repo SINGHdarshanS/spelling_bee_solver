@@ -1,5 +1,6 @@
-import numpy as np
+from cutdown import trim
 
+trim()
 letters = set()
 i = 0
 cont = False
@@ -74,3 +75,16 @@ with open('todays_answers.txt', 'r') as f:
             yn = input(f'{line.rstrip()}?\t')
             if not yn:
                 black.write(line)
+
+print('Blacklist updated')
+
+with open('whitelist.txt', 'a') as f:
+    extra = input("\n\nDid we miss any words from yesterday? Type \'no\' if there were none. Press enter if not.\t\t")
+    if extra.lower().lstrip().rstrip() != 'no':
+        f.write('\n')
+        word = input("\nType a word that we missed from yesterday. If none remain, just press enter.\t\t")
+        while word:
+            f.write(word+'\n')
+            word = input("\nType a word that we missed from yesterday. If none remain, just press enter.\t\t")
+
+print('Whitelist updated')
