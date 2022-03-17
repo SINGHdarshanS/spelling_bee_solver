@@ -46,6 +46,7 @@ while not cont:
         cont = False
 letters.add(center)
 
+wordcount = 0
 with open('todays_answers.txt', 'w') as answers:
     with open('short_words.txt', 'r') as words:
         for line in words:
@@ -64,8 +65,10 @@ with open('todays_answers.txt', 'w') as answers:
                         break
             if yes:
                 if len(line.rstrip()) >= 4:
-                    print(line.rstrip())
+                    # print(line.rstrip())
+                    wordcount += 1
                     answers.write(line)
+print("There are {} possible solutions to today's spelling bee".format(wordcount))
 
 print('\n\n\n\n\n If the following words work please enter yes and press enter, otherwise just press enter...\n\n')
 
@@ -79,7 +82,7 @@ with open('todays_answers.txt', 'r') as f:
 print('Blacklist updated')
 
 with open('whitelist.txt', 'a') as f:
-    extra = input("\n\nDid we miss any words from yesterday? Type \'no\' if there were none. Press enter if not.\t\t")
+    extra = input("\n\nDid we miss any words from yesterday? Type \'no\' if there were none. Press enter otherwise.\t\t")
     if extra.lower().lstrip().rstrip() != 'no':
         f.write('\n')
         word = input("\nType a word that we missed from yesterday. If none remain, just press enter.\t\t")
