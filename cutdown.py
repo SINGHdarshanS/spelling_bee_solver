@@ -21,7 +21,6 @@ def trim():
 #         if count <= 7:
 #             nf.write(line)
 #             print(line.rstrip())
-    word_list = words.words()
     with open('blacklist.txt', 'r') as f:
         blacklist = f.read()
         for word in words.words():
@@ -30,7 +29,7 @@ def trim():
             if count <= 7:
                 if word not in blacklist:
                     nf.write(word+'\n')
-                    print(word)
+                    # print(word)
     with open('whitelist.txt', 'r') as f:
         for line in f:
             nf.write(line)
